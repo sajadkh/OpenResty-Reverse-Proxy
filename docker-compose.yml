@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+
+  openResty:
+    image: openresty/openresty
+    ports:
+      - "80:80"
+    networks:
+      - digi-test
+    links:
+      - redis:redis
+    restart: always
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./log:/usr/local/openresty/nginx/logs
+      - ./lua:/usr/local/lib/lua-libs
+  
+  webserver:
+    image: digikala/mock
+    ports:
+      - "8000:8000"
+    networks:
+      - digi-test
+    restart: always
+  
+  redis:
+    networks:
+      - digi-test
+    ports:
+      - "6379:6379"
+    image: redis
+    restart: always
+
+networks:
+  digi-test:
+    name: digi-test
+    driver: bridge
