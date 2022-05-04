@@ -1,5 +1,7 @@
 local _M = {}
 
+
+-- Dind host address
 function _M.getHost(service, defaultHost)
     local redis = require "resty.redis"
     local red = redis:new()
@@ -32,6 +34,7 @@ function _M.getHost(service, defaultHost)
     end
 end
 
+-- Find service name
 function _M.getService(path)
     local paths = split(path, '[\\/]+')
     if #paths > 1 then
@@ -45,6 +48,7 @@ function _M.getService(path)
     end    
 end
 
+-- Split a String
 function split(str, pat)
     local t = {}
     local fpat = "(.-)" .. pat

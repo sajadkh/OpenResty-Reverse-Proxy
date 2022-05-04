@@ -16,7 +16,7 @@ services:
       - ./lua:/usr/local/lib/lua-libs
   
   webserver:
-    image: digikala/mock
+    image: digi/mock
     ports:
       - "8000:8000"
     networks:
